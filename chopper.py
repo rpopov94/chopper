@@ -1,6 +1,7 @@
 from serial.tools import list_ports, miniterm
 import sqlite3
 
+
 bd = sqlite3.connect("chopper.sqllite")
 
 cur = bd.cursor()
@@ -27,4 +28,15 @@ def serial_ports():
     return com_list
 
 
+n_ports = serial_ports()
+N = len(n_ports)
+
+
+def add_to_database(*args, ):
+    cur.execute(f"""INSERT INTO users({[i for i in n_ports]}) 
+                    VALUES('00001', 'Alex', 'Smith', 'male');""")
+    bd.commit()
+
+
 speeds = ['1200', '2400', '4800', '9600', '19200', '38400', '57600', '115200']
+
