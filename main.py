@@ -1,11 +1,19 @@
+import sys  # sys нужен для передачи argv в QApplication
+from PyQt5 import QtWidgets
+import design
 from chopper import serial_ports, speeds
 import serial
 
 
-class LedApp:
+class LedApp(QtWidgets.QMainWindow, design.Ui_Form):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
+        self.Port.addItems(serial_ports())
+        self.Speed.addItems(speeds)
         self.realport = None
+        self.ConnectButton.clicked.connect(self.connect)
+        self.EnableBtn.clicked.connect(self.send)
 
     def connect(self):
         try:
@@ -20,7 +28,9 @@ class LedApp:
 
 
 def main():
+    app = QtWidgets.QApplication(sys.argv)
     window = LedApp()
+    window.show()
     app.exec_()
 
 
