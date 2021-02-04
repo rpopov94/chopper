@@ -27,5 +27,4 @@ def serial_ports():
     return com_list
 
 
-columm = serial_ports()
-create_table(columm)
+speeds = ['1200', '2400', '4800', '9600', '19200', '38400', '57600', '115200']
