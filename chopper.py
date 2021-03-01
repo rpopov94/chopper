@@ -19,7 +19,7 @@ def serial_ports():
         return com_list
 
 
-def my_connect(name):
+def connect(name):
     '''
     :param name: имя порта
     :return: возвращает статус подкючения
@@ -42,7 +42,7 @@ def my_connect(name):
         return f'Serial port {ser.name} {e}'
 
 
-def generate_command(nblock, register, cmd, data):
+def smc32_command(nblock, register, cmd, data):
     """
     :param nblock: номер блока
     :param register: номер регистра
@@ -66,7 +66,7 @@ def generate_command(nblock, register, cmd, data):
     ser.write(request)
 
 
-def myresponse():
+def smc32response():
     """
     :return: ответ блока на запрос
     """

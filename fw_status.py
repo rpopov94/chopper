@@ -3,6 +3,10 @@ class Status:
         self.response = response
 
     def get_status(self, string):
+        '''
+        :param string: запрос
+        :return: сообщение о стостоянии
+        '''
         message = []
         d = {
             0: "тумблер на передней панели",
@@ -31,17 +35,15 @@ class Status:
         return message
 
     def get_response(self):
+        '''
+        :return: запрос к словарю состояний
+        '''
         b = list(str(bin(self.response))[2::])
         p = [int(i) for i in b][::-1]
         resp = []
         for k in range(len(p)):
             if p[k] != 0:
                 resp.append(k)
-        print(*resp)
         return resp
 
-
-st = Status(68)
-r = st.get_response()
-print(st.get_status(r))
 
