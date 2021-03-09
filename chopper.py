@@ -19,13 +19,12 @@ def serial_ports():
         return com_list
 
 
-def connect(name):
+def ch_connect(name):
     '''
     :param name: имя порта
     :return: возвращает статус подкючения
     '''
     name = name.upper()
-    global ser
     ser = Serial(
         port=name,
         baudrate=9600,
@@ -35,11 +34,14 @@ def connect(name):
         timeout=1,
         writeTimeout=1
     )
-    try:
-        ser.isOpen()
-        return 'Succsesful!'
-    except Exception as e:
-        return f'Serial port {ser.name} {e}'
+    if ser.isOpen():
+        print('Succsesful!')
+    else:
+        print('Error connection')
+    # if ser.isOpen():
+    #     return 'Succsesful!'
+    # else:
+    #     return 'Error connection'
 
 
 def smc32_command(nblock, register, cmd, data):
