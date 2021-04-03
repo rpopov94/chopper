@@ -8,21 +8,50 @@ Form, Base = uic.loadUiType("dialog.ui")
 
 
 class UpdateInterface(QThread):
-    req = smc32_command(int(value), 0, 'r', 0).decode('utf-8')
+    req = monitor()
+    onebit = req[0]
+    twobit = req[1]
+    threebit = req[2]
+    fourbit = req[3]
+    fivebit = req[4]
+    sixbit = req[5]
+    sevenbit = req[6]
+    eightbit = req[7]
+    ninebit = req[8]
+    tenbit = req[9]
+    elevenbit = req[10]
+    twentybit = req[11]
+    thirtybit = req[12]
+    fourteeenbit = req[13]
+    fifteenbit = req[14]
+    sixteenbit = req[15]
     
     def __init__(self):
         QThread.__init__(self)
-        self.test = config()
 
     def run(self):
+        s = config()
         while True:
-            for key, value in self.test.items():
-                ch_connect(str(key))
-                self.req = smc32_command(int(value), 0, 'r', 0).decode('utf-8')
-                ch_disconnect()
-                time.sleep(1)
-            time.sleep(3)
-
+            self.req = monitor()
+            self.onebit = req[0]
+            self.twobit = req[1]
+            self.threebit = req[2]
+            self.fourbit = req[3]
+            self.fivebit = req[4]
+            self.sixbit = req[5]
+            self.sevenbit = req[6]
+            self.eightbit = req[7]
+            self.ninebit = req[8]
+            self.tenbit = req[9]
+            self.elevenbit = req[10]
+            self.twentybit = req[11]
+            self.thirtybit = req[12]
+            self.fourteeenbit = req[13]
+            self.fifteenbit = req[14]
+            self.sixteenbit = req[15]
+            time.sleep(3600)
+        
+    
 
 class MyWindow(QtWidgets.QWidget, Form):
     def __init__(self, parent=None):
@@ -59,42 +88,38 @@ class MyWindow(QtWidgets.QWidget, Form):
         self.label_56.setStyleSheet("background-color: #DCDCDC")
         self.label_57.setStyleSheet("background-color: #DCDCDC")
         self.label_58.setStyleSheet("background-color: #DCDCDC")
-        '''
-        вставить кусок, который будет возврашать словарь состояния
-        и менять стиль конкретной строчки
-        '''
-        response = 'сюда вставить функцию ответа'
-        if response[0] == '1':
+        '''реагируем на ответ платы'''
+        if self.current.onebit == '1':
             self.label_59.setStyleSheet("background-color: red")
-        if response[1] == '1':
+        if self.current.twobit == '1':
             self.label_30.setStyleSheet("background-color: red")
-        if response[2] == '1':
+        if self.current.threebit == '1':
             self.label_45.setStyleSheet("background-color: red")
-        if response[3] == '1':
+        if self.current.fourbit == '1':
             self.label_46.setStyleSheet("background-color: red")
-        if response[4] == '1':
+        if self.current.fivebit == '1':
             self.label_47.setStyleSheet("background-color: red")
-        if response[5] == '1':
+        if self.current.sixbit == '1':
             self.label_48.setStyleSheet("background-color: red")
-        if response[6] == '1':
+        if self.current.sevenbit == '1':
             self.label_49.setStyleSheet("background-color: red")
-        if response[7] == '1':
+        if self.current.eightbit == '1':
             self.label_50.setStyleSheet("background-color: red")
-        if response[8] == '1':
+        if self.current.ninebit == '1':
             self.label_51.setStyleSheet("background-color: red")
-        if response[9] == '1':
+        if self.current.tenbit == '1':
             self.label_52.setStyleSheet("background-color: red")
-        if response[10] == '1':
+        if self.current.elevenbit == '1':
             self.label_53.setStyleSheet("background-color: red")
-        if response[11] == '1':
+        if self.current.twentybit == '1':
             self.label_54.setStyleSheet("background-color: red")
-        if response[12] == '1':
+        if self.current.thirtybit == '1':
             self.label_55.setStyleSheet("background-color: red")
-        if response[13] == '1':
+        if self.current.fourteeenbit == '1':
             self.label_56.setStyleSheet("background-color: red")
-        if response[14] == '1':
+        if self.current.fifteenbit == '1':
             self.label_57.setStyleSheet("background-color: red")
-        if response[15] == '1':
+        if self.current.sixteenbit == '1':
             self.label_58.setStyleSheet("background-color: red")
         
 
