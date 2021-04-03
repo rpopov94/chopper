@@ -91,6 +91,17 @@ def config():
         s.append(n.split(':'))
     return s
 
+def momitor():
+    s = config()
+    for i in range(len(s)):
+        ch_connect(str(s[i][0]))
+        response = smc32_command(int(s[i][1]), 0, 'r', 0)
+        response = response.decode('utf-8')[11:15]
+        response = list(str(bin(int(response, 16))[2:]))
+        ch_disconnect()
+        time.sleep(1)
+    return response
+
 def smc32response():
     """
     :return: ответ блока на запрос
