@@ -84,26 +84,12 @@ def smc32_command(nblock, register, cmd, data):
 
 
 def config():
-    conf = {}
     s = []
     with open('config.txt', 'r') as f:
         nums = f.read().splitlines()
     for n in nums:
         s.append(n.split(':'))
-    for i in range(len(s)):
-        conf[s[i][0]] = s[i][1]
-    return conf
-
-print(config())
-
-def monitor():
-    s = config()
-    for i in s:
-        ch_connect(str(s[i][0]))
-        response = smc32_command(int(s[i][1]), 0, 'r', 0)
-        response = response.decode('utf-8')[11:15]
-        response = list(str(bin(int(response, 16))[2:]))
-        ch_disconnect()
+    return s
 
 def smc32response():
     """
